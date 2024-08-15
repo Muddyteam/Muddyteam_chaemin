@@ -2,6 +2,7 @@ package com.example.muddyteam_chaemin.Controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +12,8 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class KakaoMapController {
 
-    private final String kakaoApiKey = "e31961d649db20096b9c38a445e3d04d"; // 카카오 REST API 키
+    @Value("${KAKAO_API_KEY}")
+    private String kakaoApiKey;
 
     @GetMapping("/mudflat-location")
     public String getMudflatLocation(@RequestParam String mudflatName) {
@@ -26,7 +28,7 @@ public class KakaoMapController {
 
         if (response.getStatusCode() == HttpStatus.OK) {
             String responseBody = response.getBody();
-            System.out.println(responseBody); // 응답 확인
+            System.out.println(responseBody);
 
             if (responseBody != null && responseBody.startsWith("{")) {
                 ObjectMapper objectMapper = new ObjectMapper();
@@ -52,6 +54,5 @@ public class KakaoMapController {
         } else {
             return "Error: " + response.getStatusCode();
         }
-
     }
 }
