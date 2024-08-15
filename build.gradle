@@ -30,6 +30,10 @@ dependencies {
     implementation 'org.json:json:20210307'
     compileOnly 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' // WebClient를 위한 의존성
+    implementation 'com.fasterxml.jackson.core:jackson-databind' // JSON 처리
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
 }
 
 tasks.named('test') {
