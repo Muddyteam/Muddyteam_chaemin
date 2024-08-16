@@ -1,11 +1,8 @@
 package com.example.muddyteam_chaemin.Controller;
 
 import com.example.muddyteam_chaemin.Service.WeatherService;
-import com.example.muddyteam_chaemin.model.WeatherData;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class WeatherController {
@@ -16,8 +13,14 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @GetMapping("/weather")
-    public List<WeatherData> getWeather() throws Exception {
-        return weatherService.getFilteredWeatherData();
+    // 데이터를 수동으로 업데이트하는 엔드포인트
+    @GetMapping("/api/update-weather")
+    public String updateWeatherData() {
+        try {
+            weatherService.fetchAndSaveWeatherData();  // API 호출 및 DB 저장
+            return "Weather data updated successfully!";
+        } catch (Exception e) {
+            return "Failed to update weather data: " + e.getMessage();
+        }
     }
 }
