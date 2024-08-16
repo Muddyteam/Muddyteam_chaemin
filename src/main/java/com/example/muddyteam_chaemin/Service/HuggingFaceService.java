@@ -21,8 +21,7 @@ public class HuggingFaceService {
         // JSON 구조로 inputs 및 parameters 설정 (문자열 처리 오류 수정)
         String requestBody = "{ \"inputs\": \"" + question.replace("\"", "\\\"") + "\", " +
                 "\"parameters\": { \"max_length\": 20, \"num_return_sequences\": 1, " +
-                "\"temperature\": 0.5, \"top_k\": 50, \"top_p\": 0.9, \"repetition_penalty\": 1.2 } }";
-
+                "\"temperature\": 0.7, \"top_k\": 50, \"top_p\": 0.9, \"repetition_penalty\": 1.2 } }";
 
         return webClient.post()
                 .uri("/models/gpt2") // 실제 Hugging Face API 엔드포인트

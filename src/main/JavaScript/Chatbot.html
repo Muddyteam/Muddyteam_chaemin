@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>
+<h1>Ask the Chatbot</h1>
+<input type="text" id="question" placeholder="Ask a question" />
+<button onclick="askChatbot()">Send</button>
+
+<p id="response"></p>
+
+<script>
+    function askChatbot() {
+        const question = document.getElementById("question").value;
+
+        if (!question) {
+            alert("Please enter a question.");
+            return;
+        }
+
+        fetch('http://localhost:8080/api/chatbot/ask', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ question: question })
+        })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("response").innerText = data;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
